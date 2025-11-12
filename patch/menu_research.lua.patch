@@ -1,0 +1,139 @@
+--- ./original/menu_research.lua	2025-08-18 16:40:24.000000000 +0300
++++ ./fix/menu_research.lua	2025-11-12 12:48:41.479961100 +0200
+@@ -116,7 +116,9 @@
+ 				if not GetWareData(temptechlist[i], "ismissiononly") then
+ 					-- print("found " .. temptechlist[i])
+ 					local state_completed = C.HasResearched(temptechlist[i])
+-					table.insert(menu.techtree, { [1] = { [1] = { tech = temptechlist[i], sortorder = sortorder, completed = state_completed } } })
++					-- start fix: added empty precursor list
++					table.insert(menu.techtree,	{ [1] = { [1] = { tech = temptechlist[i], sortorder = sortorder, completed = state_completed, precursors = {} } } })
++					-- end fix: added empty precursor list
+ 				end
+ 				table.remove(temptechlist, i)
+ 			else
+@@ -130,7 +132,9 @@
+ 				if hasonlymissionprecursors then
+ 					-- print("found with only mission precursors" .. temptechlist[i])
+ 					local state_completed = C.HasResearched(temptechlist[i])
+-					table.insert(menu.techtree, { [1] = { [1] = { tech = temptechlist[i], sortorder = sortorder, completed = state_completed } } })
++					-- start fix: added empty precursor list
++					table.insert(menu.techtree, { [1] = { [1] = { tech = temptechlist[i], sortorder = sortorder, completed = state_completed, precursors = {} } } })
++					-- end fix: added empty precursor list
+ 					table.remove(temptechlist, i)
+ 				end
+ 			end
+@@ -177,12 +181,26 @@
+ 
+ 				-- add this tech to the tree and remove it from the list
+ 				local state_completed = C.HasResearched(temptechlist[idx])
++				-- start fix: build new entry with precursor links
++				local newentry = { tech = temptechlist[idx], sortorder = sortorder, completed = state_completed, precursors = {} }
++				for _, precursor in ipairs(techprecursors) do
++					local precursorMainIdx, precursorCol, precursorTechIdx = menu.findTech(menu.techtree, precursor)
++					if precursorMainIdx and precursorCol and precursorTechIdx then
++						newentry.precursors[#newentry.precursors + 1] = menu.techtree[precursorMainIdx][precursorCol]
++						[precursorTechIdx]
++					end
++				end
++				-- end fix: build new entry with precursor links
+ 				if menu.techtree[smallestMainIdx][foundPrecusorCol + 1] then
+ 					-- print("    adding")
+-					table.insert(menu.techtree[smallestMainIdx][foundPrecusorCol + 1], { tech = temptechlist[idx], sortorder = sortorder, completed = state_completed })
++					-- start fix: adding the data with precursor links
++					table.insert(menu.techtree[smallestMainIdx][foundPrecusorCol + 1], newentry)
++					-- end fix: adding the data with precursor links
+ 				else
+ 					-- print("    new entry")
+-					menu.techtree[smallestMainIdx][foundPrecusorCol + 1] = { [1] = { tech = temptechlist[idx], sortorder = sortorder, completed = state_completed } }
++					-- start fix: replacing the data with precursor links
++					menu.techtree[smallestMainIdx][foundPrecusorCol + 1] = { [1] = newentry }
++					-- end fix: replacing the data with precursor links
+ 				end
+ 				-- print("    removed")
+ 				table.remove(temptechlist, idx)
+@@ -335,7 +353,9 @@
+ 							end
+ 						end
+ 					end
+-				elseif menu.availableresearchmodule and menu.isResearchAvailable(techentry.tech, i, col) then
++				-- start fix: fixed research availability check
++				elseif menu.availableresearchmodule and menu.isResearchAvailable(techentry) then
++				-- end fix: fixed research availability check
+ 					local resources = GetWareData(techentry.tech, "resources")
+ 					for _, resourcedata in ipairs(resources) do
+ 						local locamount = C.GetAmountOfWareAvailable(resourcedata.ware, menu.availableresearchmodule)
+@@ -347,7 +367,9 @@
+ 					end
+ 				end
+ 				local color
+-				if (not techentry.completed) and (not menu.currentResearch[techentry.tech]) and (not menu.isResearchAvailable(techentry.tech, i, col)) then
++				-- start fix: fixed research availability check
++				if (not techentry.completed) and (not menu.currentResearch[techentry.tech]) and (not menu.isResearchAvailableEntry(techentry)) then
++					-- end fix: fixed research availability check
+ 					color = Color["research_incomplete"]
+ 				end
+ 
+@@ -365,10 +387,18 @@
+ 					menu.restoreNode = techentry.node
+ 					menu.restoreNodeTech = nil
+ 				end
+-
+-				if col > 1 then
+-					for k, previousentry in ipairs(mainentry[col - 1]) do
+-						-- print("adding edge from node " .. previousentry.tech .. " to " .. techentry.tech)
++				-- start fix: added predecessors handling to apply dependency fix
++				local predecessors = techentry.precursors or {}
++				if (#predecessors == 0) and (col > 1) then
++					local fallbackColumn = mainentry[col - 1]
++					if fallbackColumn then
++						predecessors = fallbackColumn
++					end
++				end
++				for k = 1, #predecessors do
++					local previousentry = predecessors[k]
++					if previousentry.node then
++						--end fix: added predecessors handling to apply dependency fix
+ 						local edge = previousentry.node:addEdgeTo(techentry.node)
+ 						if not previousentry.completed then
+ 							edge.properties.sourceSlotColor = Color["research_incomplete"]
+@@ -538,7 +568,9 @@
+ 		end
+ 		-- start button
+ 		local row = ftable:addRow(true, { fixed = true })
+-		local isavailable = menu.isResearchAvailable(data.techdata.tech, data.mainIdx, data.col)
++		-- start fix: fixed research availability check
++		local isavailable = menu.isResearchAvailableEntry(data.techdata)
++		-- end fix: fixed research availability check
+ 		local mouseovertext = ""
+ 		if not isavailable then
+ 			if menu.availableresearchmodule then
+@@ -910,19 +942,22 @@
+ 	return aIdx > bIdx
+ end
+ 
+-function menu.isResearchAvailable(tech, mainIdx, col)
+-	if menu.availableresearchmodule then
+-		if col > 1 then
+-			for _, techentry in ipairs(menu.techtree[mainIdx][col - 1]) do
+-				if not techentry.completed then
++-- start fix: fixed research availability check
++function menu.isResearchAvailableEntry(techentry)
++	if not menu.availableresearchmodule then
+ 					return false
+ 				end
++	if techentry.precursors then
++		for i = 1, #techentry.precursors do
++			local precursor = techentry.precursors[i]
++			if not precursor.completed then
++				return false
+ 			end
+ 		end
+-		return true
+ 	end
+-	return false
++	return true
+ end
++-- end fix: fixed research availability check
+ 
+ function menu.sortTechName(a, b)
+ 	local aname = GetWareData(a.tech, "name")
