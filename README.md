@@ -21,7 +21,7 @@ Fixes the research interdependency visualization UI to correctly show dependenci
 
 ## Installation
 
-You can download the latest version via Steam client - [Research dependency display fix](https://steamcommunity.com/sharedfiles/filedetails/?id=)
+You can download the latest version via Steam client - [Research dependency display fix](https://steamcommunity.com/sharedfiles/filedetails/?id=3604448510)
 Or you can do it via the Nexus Mods - [Mining in Sector for Mimic Repeat Orders](https://www.nexusmods.com/x4foundations/mods/1882)
 
 ## Usage
