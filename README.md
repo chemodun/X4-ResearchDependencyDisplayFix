@@ -73,7 +73,7 @@ There is a mess, instead of simple dependency `Test research` on other four rese
 
 ## Bug report about the issue
 
-Please be aware that this issue has been reported to Egosoft already, and you can track its progress here: [[Bug: UI/LUA]Research interdependency visualization issue](https://)
+Please be aware that this issue has been reported to Egosoft already, and you can track its progress here: [[Bug: UI/LUA] Research interdependency visualization issue](https://forum.egosoft.com/viewtopic.php?t=473564)
 
 ## Credits
 
