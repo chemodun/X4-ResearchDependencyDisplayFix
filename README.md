@@ -21,7 +21,7 @@ Fixes the research interdependency visualization UI to correctly show dependenci
 
 ## Compatibility
 
-- If [Kuertee UI Extensions and HUD](https://www.nexusmods.com/x4foundations/mods/552) by [kuertee](https://next.nexusmods.com/profile/kuertee?gameId=2659) is installed and enabled, this mod will not break its functionality and still provide the fix.
+- If [UI Extensions and HUD](https://www.nexusmods.com/x4foundations/mods/552) by [kuertee](https://next.nexusmods.com/profile/kuertee?gameId=2659) is installed and enabled, this mod will not break its functionality and still provide the fix.
 
 ## Installation
 
