@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="Research_Test" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
+    <cues>
+        <cue name="Init" instantiate="true">
+            <conditions>
+                <check_any>
+                    <event_cue_signalled cue="md.Setup.GameStart" />
+                    <event_game_loaded />
+                </check_any>
+            </conditions>
+            <actions>
+                <debug_text text="'ResearchDisplayFix: Init ware for test'" chance="100"
+                    filter="general" />
+
+                <add_encyclopedia_entry type="researchables" item="'research_test_ware_for_display_fix'"/>
+            </actions>
+        </cue>
+    </cues>
+</mdscript>
