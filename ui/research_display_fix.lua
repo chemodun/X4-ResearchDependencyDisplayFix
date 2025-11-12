@@ -65,8 +65,6 @@ function ResearchDisplayFix.Init()
 end
 
 function ResearchDisplayFix.onShowMenu()
-	DebugError("ResearchDisplayFix: onShowMenu called")
-
 	Helper.setTabScrollCallback(menu, menu.onTabScroll)
 	registerForEvent("inputModeChanged", getElement("Scene.UIContract"), menu.onInputModeChanged)
 
@@ -240,7 +238,6 @@ function ResearchDisplayFix.onShowMenu()
 end
 
 function ResearchDisplayFix.display()
-	DebugError("ResearchDisplayFix: Displaying Research Menu")
 	-- remove old data
 	Helper.clearDataForRefresh(menu)
 
@@ -450,8 +447,6 @@ function ResearchDisplayFix.display()
 end
 
 function ResearchDisplayFix.expandNode(_, ftable, _, data)
-	DebugError("ResearchDisplayFix: Expanding node called")
-
 	AddUITriggeredEvent(menu.name, "research_selected", data.techdata.tech)
 	local description, researchtime = GetWareData(data.techdata.tech, "description", "researchtime")
 	-- description
@@ -598,7 +593,6 @@ function ResearchDisplayFix.expandNode(_, ftable, _, data)
 end
 
 function ResearchDisplayFix.expandNodeUIX(_, ftable, _, data)
-	DebugError("ResearchDisplayFix: Expanding node called (UIX)")
 	AddUITriggeredEvent(menu.name, "research_selected", data.techdata.tech)
 	local description, researchtime = GetWareData(data.techdata.tech, "description", "researchtime")
 	-- description
