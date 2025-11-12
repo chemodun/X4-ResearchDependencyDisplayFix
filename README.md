@@ -19,6 +19,10 @@ Fixes the research interdependency visualization UI to correctly show dependenci
   - It is available via Steam - [SirNukes Mod Support APIs](https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274)
   - Or via the Nexus Mods - [Mod Support APIs](https://www.nexusmods.com/x4foundations/mods/503)
 
+## Compatibility
+
+- If [Kuertee UI Extensions and HUD](https://www.nexusmods.com/x4foundations/mods/552) by [kuertee](https://next.nexusmods.com/profile/kuertee?gameId=2659) is installed and enabled, this mod will not break its functionality and still provide the fix.
+
 ## Installation
 
 You can download the latest version via Steam client - [Research dependency display fix](https://steamcommunity.com/sharedfiles/filedetails/?id=3604448510)
