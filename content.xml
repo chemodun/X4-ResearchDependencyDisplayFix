@@ -11,4 +11,5 @@
   <dependency version="800"></dependency>
   <dependency id="ws_2042901274" optional="false" name="SirNukes Mod Support APIs" version="193"></dependency>
   <dependency id="kuerteeUIExtensionsAndHUD" optional="true" name="kuertee UI Extensions and HUD"></dependency>
+  <dependency id="ws_3477279743" optional="true" name="kuertee UI Extensions and HUD"></dependency>
 </content>
