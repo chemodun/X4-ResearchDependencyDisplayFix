@@ -21,6 +21,10 @@ Fixes the research interdependency visualization UI to correctly show dependenci
 [*] Or via the Nexus Mods - [url=https://www.nexusmods.com/x4foundations/mods/503]Mod Support APIs[/url]
 [/list]
 [/list]
+[h2][b]Compatibility[/b][/h2]
+[list]
+[*] If [url=https://www.nexusmods.com/x4foundations/mods/552]Kuertee UI Extensions and HUD[/url] by [url=https://next.nexusmods.com/profile/kuertee?gameId=2659]kuertee[/url] is installed and enabled, this mod will not break its functionality and still provide the fix.
+[/list]
 [h2][b]Installation[/b][/h2]
 
 You can download the latest version via Steam client - [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3604448510]Research dependency display fix[/url]
