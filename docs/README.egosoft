@@ -10,6 +10,7 @@ Fixes the research interdependency visualization UI to correctly show dependenci
 [size=130][u]Limitations[/u][/size]
 [list]
 [*] There is a temporary solution for the issue till Egosoft will fix it in the game itself.
+[*] Mostly be interested for modders that create complex research dependencies.
 [/list]
 [size=130][u]Requirements[/u][/size]
 [list]
@@ -23,7 +24,7 @@ Fixes the research interdependency visualization UI to correctly show dependenci
 [size=130][u]Installation[/u][/size]
 
 You can download the latest version via Steam client - [url=https://steamcommunity.com/sharedfiles/filedetails/?id=]Research dependency display fix[/url]
-Or you can do it via the Nexus Mods - [url=https://www.nexusmods.com/x4foundations/mods/]Mining in Sector for Mimic Repeat Orders[/url]
+Or you can do it via the Nexus Mods - [url=https://www.nexusmods.com/x4foundations/mods/1882]Mining in Sector for Mimic Repeat Orders[/url]
 
 [size=130][u]Usage[/u][/size]
 [list]
