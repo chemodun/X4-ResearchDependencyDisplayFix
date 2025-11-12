@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <content
   id=""
-  name="Research dependency display fix"
+  name="Fix for Research interdependency visualization"
   author="Chem O`Dun"
   version="100"
-  date="2025-11-11"
+  date="2025-11-12"
   save="false"
   lastupdate="1762689501"
-  description="Fixes the research display UI to correctly show dependencies for research items.">
+  description="Fixes the research interdependency visualization UI to correctly show dependencies for research items.">
   <dependency version="800"></dependency>
   <dependency id="ws_2042901274" optional="false" name="SirNukes Mod Support APIs" version="193"></dependency>
   <dependency id="kuerteeUIExtensionsAndHUD" optional="true" name="kuertee UI Extensions and HUD"></dependency>
