@@ -451,6 +451,7 @@ end
 function ResearchDisplayFix.isResearchAvailable(tech, mainIdx, col)
   if menu.availableresearchmodule then
     if col > 1 then
+      -- start fix: finding current tech and checking its predecessors
       local currentColumn = menu.techtree[mainIdx][col]
       for i = 1, #currentColumn do
         local techentry = currentColumn[i]
@@ -466,6 +467,7 @@ function ResearchDisplayFix.isResearchAvailable(tech, mainIdx, col)
           return true
         end
       end
+      -- end fix: finding current tech and checking its predecessors
     end
     return true
   end
