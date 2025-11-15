@@ -1,5 +1,5 @@
---- ./original/menu_research.lua	2025-08-18 16:40:24.000000000 +0300
-+++ ./fix/menu_research.lua	2025-11-12 12:48:41.479961100 +0200
+--- ui.original/menu_research.lua	2025-08-18 16:40:24.000000000 +0300
++++ ui.modified/menu_research.lua	2025-11-15 21:37:59.832444800 +0200
 @@ -116,7 +116,9 @@
  				if not GetWareData(temptechlist[i], "ismissiononly") then
  					-- print("found " .. temptechlist[i])
@@ -51,29 +51,7 @@
  				end
  				-- print("    removed")
  				table.remove(temptechlist, idx)
-@@ -335,7 +353,9 @@
- 							end
- 						end
- 					end
--				elseif menu.availableresearchmodule and menu.isResearchAvailable(techentry.tech, i, col) then
-+				-- start fix: fixed research availability check
-+				elseif menu.availableresearchmodule and menu.isResearchAvailable(techentry) then
-+				-- end fix: fixed research availability check
- 					local resources = GetWareData(techentry.tech, "resources")
- 					for _, resourcedata in ipairs(resources) do
- 						local locamount = C.GetAmountOfWareAvailable(resourcedata.ware, menu.availableresearchmodule)
-@@ -347,7 +367,9 @@
- 					end
- 				end
- 				local color
--				if (not techentry.completed) and (not menu.currentResearch[techentry.tech]) and (not menu.isResearchAvailable(techentry.tech, i, col)) then
-+				-- start fix: fixed research availability check
-+				if (not techentry.completed) and (not menu.currentResearch[techentry.tech]) and (not menu.isResearchAvailableEntry(techentry)) then
-+					-- end fix: fixed research availability check
- 					color = Color["research_incomplete"]
- 				end
- 
-@@ -365,10 +387,18 @@
+@@ -365,10 +383,18 @@
  					menu.restoreNode = techentry.node
  					menu.restoreNodeTech = nil
  				end
@@ -96,44 +74,29 @@
  						local edge = previousentry.node:addEdgeTo(techentry.node)
  						if not previousentry.completed then
  							edge.properties.sourceSlotColor = Color["research_incomplete"]
-@@ -538,7 +568,9 @@
- 		end
- 		-- start button
- 		local row = ftable:addRow(true, { fixed = true })
--		local isavailable = menu.isResearchAvailable(data.techdata.tech, data.mainIdx, data.col)
-+		-- start fix: fixed research availability check
-+		local isavailable = menu.isResearchAvailableEntry(data.techdata)
-+		-- end fix: fixed research availability check
- 		local mouseovertext = ""
- 		if not isavailable then
- 			if menu.availableresearchmodule then
-@@ -910,19 +942,22 @@
- 	return aIdx > bIdx
- end
- 
--function menu.isResearchAvailable(tech, mainIdx, col)
--	if menu.availableresearchmodule then
--		if col > 1 then
+@@ -913,12 +939,23 @@
+ function menu.isResearchAvailable(tech, mainIdx, col)
+ 	if menu.availableresearchmodule then
+ 		if col > 1 then
 -			for _, techentry in ipairs(menu.techtree[mainIdx][col - 1]) do
 -				if not techentry.completed then
-+-- start fix: fixed research availability check
-+function menu.isResearchAvailableEntry(techentry)
-+	if not menu.availableresearchmodule then
++			-- start fix: finding current tech and checking its predecessors
++      		local currentColumn = menu.techtree[mainIdx][col]
++			for i = 1, #currentColumn do
++				local techentry = currentColumn[i]
++				if techentry and techentry.tech == tech then
++					if techentry.precursors and #techentry.precursors > 0 then
++						for i = 1, #techentry.precursors do
++							local precursor = techentry.precursors[i]
++							if not precursor.completed then
  					return false
  				end
-+	if techentry.precursors then
-+		for i = 1, #techentry.precursors do
-+			local precursor = techentry.precursors[i]
-+			if not precursor.completed then
-+				return false
  			end
  		end
--		return true
++				end
++			end
++			-- end fix: finding current tech and checking its predecessors
++		end
+ 		return true
  	end
--	return false
-+	return true
- end
-+-- end fix: fixed research availability check
- 
- function menu.sortTechName(a, b)
- 	local aname = GetWareData(a.tech, "name")
+ 	return false
