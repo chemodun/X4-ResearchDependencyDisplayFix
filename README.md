@@ -92,6 +92,11 @@ Please be aware that this issue has been reported to Egosoft already, and you ca
 
 ## Changelog
 
+### [1.01] - 2025-11-15
+
+- Improved
+  - Compatibility with `Kuertee UI Extensions and HUD` mod.
+
 ### [1.00] - 2025-11-12
 
 - Added

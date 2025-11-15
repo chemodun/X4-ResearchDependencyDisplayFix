@@ -11,6 +11,7 @@
           <ware ware="research_mod_engine_mk1" />
           <ware ware="research_mod_shield_mk1" />
           <ware ware="research_mod_weapon_mk1"/>
+          <ware ware="research_module_welfare_1"/>
         </research>
       </research>
     </ware>

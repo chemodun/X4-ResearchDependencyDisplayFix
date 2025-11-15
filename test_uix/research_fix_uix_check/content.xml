@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content id="research_fix_uix_check"
+    name="Fix for Research. UIX Compatibility Check"
+    author="Chem O`Dun"
+    version="100"
+    date="2025-11-15"
+    save="false"
+    enabled="1"
+    description="Mod to verify that Research Fix does not break kuertee UI Extensions and HUD">
+    <dependency id="kuerteeUIExtensionsAndHUD" optional="true" name="kuertee UI Extensions and HUD"></dependency>
+    <dependency id="ws_3477279743" optional="true" name="kuertee UI Extensions and HUD"></dependency>
+</content>
