@@ -16,8 +16,6 @@ ffi.cdef [[
   void UpdateProduction(UniverseID containerormoduleid, bool force);
 ]]
 
-local Lib = require("extensions.sn_mod_support_apis.ui.Library")
-
 local ResearchDisplayFix = {
   egoMenuOnShowMenu = nil,
   egoMenuDisplay = nil,
@@ -35,7 +33,7 @@ local config = {
 }
 
 function ResearchDisplayFix.Init()
-  menu = Lib.Get_Egosoft_Menu("ResearchMenu")
+  menu = Helper.getMenu("ResearchMenu")
   if menu then
     DebugError("ResearchDisplayFix: Initializing Research interdependency visualization Fix")
     ResearchDisplayFix.egoMenuOnShowMenu = menu.onShowMenu
@@ -474,6 +472,6 @@ function ResearchDisplayFix.isResearchAvailable(tech, mainIdx, col)
   return false
 end
 
-Register_OnLoad_Init(ResearchDisplayFix.Init, "extensions.research_display_fix.ui.research_display_fix")
+ResearchDisplayFix.Init()
 
 return ResearchDisplayFix
