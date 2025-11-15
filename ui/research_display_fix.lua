@@ -456,14 +456,12 @@ function ResearchDisplayFix.isResearchAvailable(tech, mainIdx, col)
       local currentColumn = menu.techtree[mainIdx][col]
       for i = 1, #currentColumn do
         local techentry = currentColumn[i]
-        if techentry.tech == tech then
-          if techentry.precursors then
-            if techentry.precursors and #techentry.precursors > 0 then
-              for i = 1, #techentry.precursors do
-                local precursor = techentry.precursors[i]
-                if not precursor.completed then
-                  return false
-                end
+        if techentry and techentry.tech == tech then
+          if techentry.precursors and #techentry.precursors > 0 then
+            for i = 1, #techentry.precursors do
+              local precursor = techentry.precursors[i]
+              if not precursor.completed then
+                return false
               end
             end
           end
