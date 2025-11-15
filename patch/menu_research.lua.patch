@@ -23,7 +23,7 @@
  				end
  			end
 @@ -177,12 +181,26 @@
- 
+
  				-- add this tech to the tree and remove it from the list
  				local state_completed = C.HasResearched(temptechlist[idx])
 +				-- start fix: build new entry with precursor links
@@ -80,6 +80,7 @@
  		if col > 1 then
 -			for _, techentry in ipairs(menu.techtree[mainIdx][col - 1]) do
 -				if not techentry.completed then
+-					return false
 +			-- start fix: finding current tech and checking its predecessors
 +      		local currentColumn = menu.techtree[mainIdx][col]
 +			for i = 1, #currentColumn do
@@ -89,14 +90,13 @@
 +						for i = 1, #techentry.precursors do
 +							local precursor = techentry.precursors[i]
 +							if not precursor.completed then
- 					return false
++								return false
++							end
++						end
++					end
  				end
  			end
- 		end
-+				end
-+			end
 +			-- end fix: finding current tech and checking its predecessors
-+		end
+ 		end
  		return true
  	end
- 	return false
