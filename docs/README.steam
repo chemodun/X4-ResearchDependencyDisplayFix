@@ -15,14 +15,10 @@ Fixes the research interdependency visualization UI to correctly show dependenci
 [h2][b]Requirements[/b][/h2]
 [list]
 [*] [b]X4: Foundations[/b] 8.00HF3.
-[*] [b]Mod Support APIs[/b] by [url=https://next.nexusmods.com/profile/sirnukes?gameId=2659]SirNukes[/url] to be installed and enabled. Version [b]1.93[/b] and upper is required.
-[list]
-[*] It is available via Steam - [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274]SirNukes Mod Support APIs[/url]
-[*] Or via the Nexus Mods - [url=https://www.nexusmods.com/x4foundations/mods/503]Mod Support APIs[/url]
-[/list]
 [/list]
 [h2][b]Compatibility[/b][/h2]
 [list]
+[*] if [b]Mod Support APIs[/b] by [url=https://next.nexusmods.com/profile/sirnukes?gameId=2659]SirNukes[/url] is installed and enabled, this mod will work correctly. From version 1.01 it is optional dependency.
 [*] If [url=https://www.nexusmods.com/x4foundations/mods/552]UI Extensions and HUD[/url] by [url=https://next.nexusmods.com/profile/kuertee?gameId=2659]kuertee[/url] is installed and enabled, this mod will not break its functionality and still provide the fix.
 [/list]
 [h2][b]Installation[/b][/h2]
@@ -76,7 +72,6 @@ There is a mess, instead of simple dependency [b]Test research[/b] on other four
 
 [img]https://raw.githubusercontent.com/chemodun/X4-ResearchDependencyDisplayFix/refs/heads/main/docs/images/research_dependency_display_fixed.png[/img]
 
-
 [h2][b]Bug report about the issue[/b][/h2]
 
 Please be aware that this issue has been reported to Egosoft already, and you can track its progress here: [[url=https://forum.egosoft.com/viewtopic.php?t=473564]Bug: UI/LUA] Research interdependency visualization issue[/url]
@@ -99,6 +94,7 @@ Please be aware that this issue has been reported to Egosoft already, and you ca
 [*] Improved
 [list]
 [*] Compatibility with [b]Kuertee UI Extensions and HUD[/b] mod.
+[*] Removed strict dependency on [b]Mod Support APIs[/b] mod, now it is optional
 [/list]
 [/list]
 [h2][1.00] - 2025-11-12[/h2]
