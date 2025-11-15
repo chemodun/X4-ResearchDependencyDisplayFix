@@ -15,12 +15,10 @@ Fixes the research interdependency visualization UI to correctly show dependenci
 ## Requirements
 
 - `X4: Foundations` 8.00HF3.
-- `Mod Support APIs` by [SirNukes](https://next.nexusmods.com/profile/sirnukes?gameId=2659) to be installed and enabled. Version `1.93` and upper is required.
-  - It is available via Steam - [SirNukes Mod Support APIs](https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274)
-  - Or via the Nexus Mods - [Mod Support APIs](https://www.nexusmods.com/x4foundations/mods/503)
 
 ## Compatibility
 
+- if `Mod Support APIs` by [SirNukes](https://next.nexusmods.com/profile/sirnukes?gameId=2659) is installed and enabled, this mod will work correctly. From version 1.01 it is optional dependency.
 - If [UI Extensions and HUD](https://www.nexusmods.com/x4foundations/mods/552) by [kuertee](https://next.nexusmods.com/profile/kuertee?gameId=2659) is installed and enabled, this mod will not break its functionality and still provide the fix.
 
 ## Installation
@@ -74,7 +72,6 @@ There is a mess, instead of simple dependency `Test research` on other four rese
 
 ![After the fix - example research item with multiple dependencies](docs/images/research_dependency_display_fixed.png)
 
-
 ## Bug report about the issue
 
 Please be aware that this issue has been reported to Egosoft already, and you can track its progress here: [[Bug: UI/LUA] Research interdependency visualization issue](https://forum.egosoft.com/viewtopic.php?t=473564)
@@ -96,6 +93,7 @@ Please be aware that this issue has been reported to Egosoft already, and you ca
 
 - Improved
   - Compatibility with `Kuertee UI Extensions and HUD` mod.
+  - Removed strict dependency on `Mod Support APIs` mod, now it is optional
 
 ### [1.00] - 2025-11-12
 
