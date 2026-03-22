@@ -2,6 +2,12 @@ local ffi = require("ffi")
 local C = ffi.C
 
 ffi.cdef [[
+  typedef struct {
+    int major;
+    int minor;
+  } GameVersion;
+
+  GameVersion GetGameVersion();
   void ClearProductionItems(UniverseID productionmoduleid);
   uint32_t GetAmountOfWareAvailable(const char* wareid, UniverseID productionmoduleid);
   int64_t GetEstimatedResearchPrice(UniverseID containerid, const char* researchwareid);
@@ -33,22 +39,28 @@ local config = {
 }
 
 function ResearchDisplayFix.Init()
-  menu = Helper.getMenu("ResearchMenu")
-  if menu then
-    DebugError("ResearchDisplayFix: Initializing Research interdependency visualization Fix")
-    ResearchDisplayFix.egoMenuOnShowMenu = menu.onShowMenu
-    menu.onShowMenu = function()
-      ResearchDisplayFix.onShowMenu()
+
+  local version = C.GetGameVersion()
+  if version.major == 8 then
+    menu = Helper.getMenu("ResearchMenu")
+    if menu then
+      DebugError("ResearchDisplayFix: Initializing Research interdependency visualization Fix")
+      ResearchDisplayFix.egoMenuOnShowMenu = menu.onShowMenu
+      menu.onShowMenu = function()
+        ResearchDisplayFix.onShowMenu()
+      end
+      ResearchDisplayFix.egoMenuDisplay = menu.display
+      menu.display = function()
+        ResearchDisplayFix.display()
+      end
+      ResearchDisplayFix.egoMenuIsResearchAvailable = menu.isResearchAvailable
+      menu.isResearchAvailable = function(techid, mainIdx, col)
+        return ResearchDisplayFix.isResearchAvailable(techid, mainIdx, col)
+      end
+      DebugError("ResearchDisplayFix: Research interdependency visualization applied")
     end
-    ResearchDisplayFix.egoMenuDisplay = menu.display
-    menu.display = function()
-      ResearchDisplayFix.display()
-    end
-    ResearchDisplayFix.egoMenuIsResearchAvailable = menu.isResearchAvailable
-    menu.isResearchAvailable = function(techid, mainIdx, col)
-      return ResearchDisplayFix.isResearchAvailable(techid, mainIdx, col)
-    end
-    DebugError("ResearchDisplayFix: Research interdependency visualization applied")
+  else
+    DebugError("ResearchDisplayFix: Not applying Research interdependency visualization Fix due to incompatible game version")
   end
 end
 
