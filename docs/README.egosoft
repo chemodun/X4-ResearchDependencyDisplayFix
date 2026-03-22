@@ -1,5 +1,6 @@
 [size=140][u]Fix for Research interdependency visualization[/u][/size]
 
+[b]Only for game version 8.00[/b]
 Fixes the research interdependency visualization UI to correctly show dependencies for research items.
 
 [size=130][u]Features[/u][/size]
@@ -89,6 +90,13 @@ Please be aware that this issue has been reported to Egosoft already, and you ca
 [/list]
 [size=130][u]Changelog[/u][/size]
 
+[size=125][u][1.02] - 2026-03-22[/u][/size]
+[list]
+[*] Fixed
+[list]
+[*] Fix will not be applied on 9.00 and upper versions of a game, as the issue is fixed in the game itself.
+[/list]
+[/list]
 [size=125][u][1.01] - 2025-11-15[/u][/size]
 [list]
 [*] Improved
